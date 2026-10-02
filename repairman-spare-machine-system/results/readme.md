@@ -108,3 +108,31 @@ The report also shows that, at higher resource limits, the optimal number of rep
 |50|	19|	50|	58,870|
 
 These results illustrate how discrete-event simulation can be used to evaluate operational performance and compare alternative resource-allocation policies before making changes to the repair system.
+
+The analysis provides information about:
+
+* Machine failure frequency
+* Machine unavailability and lost time
+* Repairman utilization
+* Repair-system congestion
+* Machine transition time
+* Spare-machine requirements
+* Repairman requirements
+* Total operational cost
+* Resource-allocation trade-offs
+
+The resource optimization analysis can therefore be used as a decision-support tool for evaluating different combinations of repairmen and spare machines.
+
+Project Visual Summary
+
+The main simulation results included in this folder are:
+
+Analysis	Visualization
+Number of failures	(number-of-failures.png)
+Total lost time	total-lost-time.png
+Repairman employment	repairmen-employment-percentage.png
+Resource optimization	total-cost-resource-optimization.png
+Total transition time	total-transition-time.png
+Maximum queue length	maximum-queue-length.png
+
+All figures are stored in the figures/ directory.
