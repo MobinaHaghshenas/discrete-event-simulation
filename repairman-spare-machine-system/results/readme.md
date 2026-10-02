@@ -123,7 +123,7 @@ The analysis provides information about:
 
 The resource optimization analysis can therefore be used as a decision-support tool for evaluating different combinations of repairmen and spare machines.
 
-Project Visual Summary
+## Project Visual Summary
 
 
 ![Number of failures](number-of-failures.png)
