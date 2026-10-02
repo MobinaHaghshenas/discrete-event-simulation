@@ -125,11 +125,16 @@ The resource optimization analysis can therefore be used as a decision-support t
 
 Project Visual Summary
 
-Analysis	Visualization
+
 ![Number of failures](number-of-failures.png)
+
 ![Total lost time](total-lost-time.png)
+
 ![Repairman employment](repairmen-employment-percentage.png)
+
 ![Resource optimization](total-cost-resource-optimization.png)
+
 ![Total transition time](total-transition-time.png)
+
 ![Maximum queue length](maximum-queue-length.png)
 
