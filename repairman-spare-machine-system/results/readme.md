@@ -17,72 +17,76 @@ The reported interval estimate is:
 ```text
 Point estimate: 708.50
 Interval estimate: [706.31, 710.69]
+```
 
-Total Lost Time
+### Total Lost Time
 
 Total lost time represents the time associated with machine unavailability when a failed machine cannot immediately be replaced by a spare machine.
 
 The reported point estimate is:
-
+```text
 Point estimate: 550.84 hours
 Interval estimate: [542.12, 559.57] hours
+```
 
-Total Transition Time
+### Total Transition Time
 
 The total transition time associated with moving machines through the repair process was estimated as:
-
+```text
 Point estimate: 290.99 hours
-Interval estimate: [290.07, 291.91] hours
+Interval estimate: [290.07, 291.91] hours```
 
-Maximum Queue Length
+### Maximum Queue Length
 
 The maximum queue length at the repair station was estimated as:
-
+```text
 Point estimate: 27.50 machines
-Interval estimate: [26.10, 28.90] machines
+Interval estimate: [26.10, 28.90] machines```
 
-Repairman Performance
-Repairman Employment
+## Repairman Performance
+### Repairman Employment
 
 The average employment percentage of the repairmen was estimated as:
-
+```text
 Point estimate: 94.42%
-Interval estimate: [94.24%, 94.60%]
+Interval estimate: [94.24%, 94.60%]```
 
 The individual repairman results reported in the study show employment percentages generally around the mid-90% range.
 
-Resource and Cost Analysis
+### Resource and Cost Analysis
 
 The simulation was also used to investigate the effect of changing the number of repairmen and spare machines.
 
 The cost analysis considers the opportunity cost of machine unavailability together with repairman cost. The report states that the opportunity cost of a lost milling machine is 10 times the repairman's wage cost.
 
-Resource Scenarios
+### Resource Scenarios
 
 The report evaluates several resource ranges.
 
-For a maximum of 10 repairmen and 10 spare machines, the reported minimum-cost configuration was:
-
+For a maximum of **10 repairmen and 10 spare machines**, the reported minimum-cost configuration was:
+```text
 Repairmen: 10
 Spare machines: 10
-Total cost: 650,290
+Total cost: 650,290```
 
-For a maximum of 20 repairmen and 20 spare machines, the reported minimum-cost configuration was:
-
+For a maximum of **20 repairmen and 20 spare machines**, the reported minimum-cost configuration was:
+```text
 Repairmen: 18
 Spare machines: 20
-Total cost: 139,850
+Total cost: 139,850```
 
-For a maximum of 50 repairmen and 50 spare machines, the reported minimum-cost configuration was:
-
+For a maximum of **50 repairmen and 50 spare machines**, the reported minimum-cost configuration was:
+```text
 Repairmen: 19
 Spare machines: 50
-Total cost: 58,870
+Total cost: 58,870```
 
 The report also shows that, at higher resource limits, the optimal number of repairmen changes relatively little while the number of spare machines increases. This reflects the higher cost associated with machine shortages compared with the additional repairman cost.
 
-Key Results
-Performance Measure	Point Estimate	Interval Estimate
+
+## Key Results
+
+|Performance Measure	|Point Estimate	|Interval Estimate|
 Number of failures	708.50	[706.31, 710.69]
 Total lost time (hours)	550.84	[542.12, 559.57]
 Total transition time (hours)	290.99	[290.07, 291.91]
