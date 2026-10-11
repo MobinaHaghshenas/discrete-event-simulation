@@ -63,24 +63,6 @@ The project README includes the parameter assumptions, result summary, convergen
 
 ---
 
-## Repository Structure
-
-```text
-discrete-event-simulation/
-├── README.md
-├── repairman-spare-machine-system/
-│   ├── README.md
-│   ├── src/
-│   └── results/
-└── three-server-queueing-simulation/
-    ├── README.md
-    ├── src/
-    ├── result/
-    └── docs/
-```
-
-This is a high-level view of the repository. See each project folder for its detailed file list and documentation.
-
 ## How to Explore
 
 1. Choose a project from the sections above.
@@ -100,5 +82,3 @@ This is a high-level view of the repository. See each project folder for its det
 - Python programming and research-oriented documentation
 
 ---
-
-*This repository is a collection of simulation studies. Each model is governed by its documented assumptions, parameter values, and implementation; results should be interpreted within that context.*
