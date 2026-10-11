@@ -1,146 +1,144 @@
 # Three-Server Queueing System Simulation
 
-A Python-based discrete-event simulation of a queueing system with three parallel service stations. The project studies customer arrivals, waiting-line behavior, server workload, and system performance over an eight-hour operating period. It also compares the stability of estimated performance measures across 1,000, 2,000, 4,000, and 6,000 independent replications.
+A Python discrete-event simulation of a shared queue served by three parallel servers. The project evaluates customer waiting, time in the system, queue length, workload by server, and server utilization over an eight-hour arrival window. It also compares estimates from 1,000, 2,000, 4,000, and 6,000 replications.
 
-## Project overview
+## Model at a glance
 
-Customers arrive at a system with three servers. If one or more servers are idle, an arriving customer is assigned randomly to one of the available servers. If all servers are busy, the customer joins a shared first-in, first-out (FIFO) waiting queue. When a service finishes, the server immediately takes the first waiting customer, if one is available.
+- **Simulation / arrival window:** 480 minutes (8 hours)
+- **First arrival:** time 0
+- **Interarrival times:** discrete uniform integers from 2 to 5 minutes, inclusive
+- **Service time — Server 1:** discrete uniform integers from 6 to 15 minutes, inclusive
+- **Service time — Server 2:** discrete uniform integers from 4 to 16 minutes, inclusive
+- **Service time — Server 3:** discrete uniform integers from 8 to 14 minutes, inclusive
+- **Queue discipline:** one shared first-in, first-out (FIFO) queue
+- **Server assignment:** if multiple servers are idle, an arriving customer is assigned randomly among them
+- **End of arrival window:** no new arrivals are scheduled after minute 480; customers already in the system can finish service after minute 480
+- **Utilization measurement:** busy time is counted only within minutes 0–480
+- **Random seed:** 2026
+- **Replication counts:** 1,000; 2,000; 4,000; 6,000
 
-The model is implemented as a discrete-event simulation: the simulation clock advances from one scheduled arrival or service-completion event to the next, rather than advancing minute by minute.
+The simulation advances from one scheduled event to the next using a priority queue. If a service completion and an arrival occur at the same time, the service completion is processed first.
 
-## Model assumptions and input parameters
+## Event logic
 
-| Parameter | Specification |
-|---|---|
-| Number of servers | 3 parallel servers |
-| Observation / arrival horizon | 8 hours (480 minutes) |
-| First arrival | At simulation time 0 |
-| Interarrival time | Discrete uniform integer from 2 to 5 minutes, inclusive |
-| Server 1 service time | Discrete uniform integer from 6 to 15 minutes, inclusive |
-| Server 2 service time | Discrete uniform integer from 4 to 16 minutes, inclusive |
-| Server 3 service time | Discrete uniform integer from 8 to 14 minutes, inclusive |
-| Queue discipline | One shared FIFO queue |
-| Server selection | Random selection among currently idle servers |
-| Replication counts compared | 1,000; 2,000; 4,000; 6,000 |
-| Random seed | 2026 |
+The editable Visio diagrams are included in `docs/`. They are currently labelled in Persian, which is fine for the original project documentation. An English flowchart image is intended for the README preview.
 
-**End-of-horizon rule:** no new arrivals are scheduled after minute 480. Customers who arrived by the end of the arrival window are still allowed to finish service after minute 480. Server utilization is calculated only over the 480-minute observation window.
+![Three-server queueing simulation event logic](./docs/three_server_queueing_flowchart.png)
 
-When an arrival and a service completion occur at the same simulation time, the service-completion event is processed first. This makes the newly available server eligible for the simultaneous arrival.
-
-## Performance measures
-
-For each replication, the simulation records:
-
-- Total number of customer arrivals during the arrival window.
-- Average customer waiting time before service, in minutes.
-- Average time in the system, from arrival until service completion, in minutes.
-- Maximum length of the waiting queue.
-- Number of customers assigned to each server.
-- Utilization percentage of each server during the 480-minute observation window.
-
-The experiment aggregates these measures across replications. It also records replication-level results and cumulative averages to help inspect convergence as the number of replications increases.
+> **Image placement:** add the English flowchart to `docs/` using the exact filename `three_server_queueing_flowchart.png` for the image above to render.
 
 ## Results
 
-The following values are the results obtained from the current run of the simulation. Each column uses the first *N* replications from the same reproducible sequence, so the four cases are nested and directly comparable.
+The table below reproduces the values in [`result/results_summary.csv`](./result/results_summary.csv). Values are means over the first *N* replications; the cases use nested prefixes of the same reproducible replication sequence.
 
 | Performance measure | 1,000 replications | 2,000 replications | 4,000 replications | 6,000 replications |
 |---|---:|---:|---:|---:|
 | Average waiting time (minutes) | 8.0568 | 8.0982 | 8.1473 | 8.1675 |
 | Average time in system (minutes) | 18.5486 | 18.5853 | 18.6360 | 18.6537 |
-| Average arrivals per replication | 137.6420 | 137.7360 | 137.7832 | 137.8477 |
+| Average total arrivals per replication | 137.6420 | 137.7360 | 137.7833 | 137.8477 |
 | Average maximum queue length | 6.2730 | 6.2910 | 6.3398 | 6.3437 |
-| Average customers assigned to Server 1 | 45.8020 | 45.8570 | 45.8757 | 45.8867 |
-| Average customers assigned to Server 2 | 47.9490 | 48.0220 | 48.0182 | 48.0695 |
-| Average customers assigned to Server 3 | 43.8910 | 43.8570 | 43.8892 | 43.8915 |
+| Average customers served — Server 1 | 45.8020 | 45.8570 | 45.8758 | 45.8867 |
+| Average customers served — Server 2 | 47.9490 | 48.0220 | 48.0183 | 48.0695 |
+| Average customers served — Server 3 | 43.8910 | 43.8570 | 43.8893 | 43.8915 |
 | Server 1 utilization (%) | 96.4371 | 96.4599 | 96.4920 | 96.5035 |
 | Server 2 utilization (%) | 96.2181 | 96.2369 | 96.2237 | 96.2363 |
 | Server 3 utilization (%) | 96.7240 | 96.7484 | 96.7546 | 96.7541 |
 
-### Initial interpretation
+### What the results show
 
-In the 6,000-replication case, the estimated average waiting time is approximately **8.17 minutes**, while the average time in the system is approximately **18.65 minutes**. Estimated server utilization is around **96% for all three servers** under the specified assumptions. The reported estimates change modestly as the replication count increases; the convergence plots provide a visual check of that behavior.
+- In the 6,000-replication case, the estimated average wait is about **8.17 minutes** and the average time in the system is about **18.65 minutes**.
+- All three servers have estimated utilization of approximately **96%** during the 480-minute observation window.
+- The cumulative-average plots below make it possible to inspect how the estimates change as the number of replications increases.
+- These results describe this model and its assumptions; they are not guarantees for a real-world system.
 
-These are simulation estimates for this model and its assumptions, not universal queueing-system performance guarantees.
+## Visual results
 
-## Visualizations and output files
+### Average waiting time
 
-The script is designed to generate the following outputs in a `results/` directory:
+The cumulative average waiting-time plot shows how the estimated mean wait evolves across the replication sequence.
 
-| File | Purpose |
-|---|---|
-| `results_summary.csv` | Consolidated comparison of the four replication counts |
-| `waiting_time_convergence.png` | Cumulative average waiting time as replications increase |
-| `time_in_system_convergence.png` | Cumulative average time in the system as replications increase |
-| `server_utilization_convergence.png` | Cumulative utilization estimates for the three servers |
-| `customers_served_by_server.png` | Average number of customers assigned to each server |
-| `replication_level_results.csv` | Results for each individual replication |
-| `convergence_data.csv` | Cumulative-average data used by the convergence plots |
-| `results.zip` | ZIP archive of the generated result files |
+![Convergence of average waiting time](./result/waiting_time_convergence.png)
 
-The project also includes the model diagrams and editable Visio materials supplied with the project, which document the conceptual model and the main simulation events.
+### Average time in the system
 
-## Project structure
+This plot tracks the cumulative estimate of the time from customer arrival until service completion.
+
+![Convergence of average time in system](./result/time_in_system_convergence.png)
+
+### Server utilization
+
+The three curves compare the cumulative utilization estimates for Server 1, Server 2, and Server 3.
+
+![Convergence of server utilization](./result/server_utilization_convergence.png)
+
+### Customers served by server
+
+The bar chart compares the average number of customers assigned to each server per replication.
+
+![Average customers served by each server](./result/customers_served_by_server.png)
+
+## Repository contents
 
 ```text
 three-server-queueing-simulation/
 ├── README.md
 ├── src/
 │   └── simulation.py
-├── results/
-│   ├── results_summary.csv
-│   ├── replication_level_results.csv
+├── result/
 │   ├── convergence_data.csv
-│   └── *.png
-└── model diagrams and editable Visio files
+│   ├── customers_served_by_server.png
+│   ├── replication_level_results.csv
+│   ├── results_summary.csv
+│   ├── server_utilization_convergence.png
+│   ├── time_in_system_convergence.png
+│   └── waiting_time_convergence.png
+└── docs/
+    ├── arrival_event_flowchart.vsdx
+    ├── conceptual_model.vsdx
+    ├── service_completion_flowchart.vsdx
+    └── simulation_controller.vsdx
 ```
 
-The exact set of generated output files depends on whether the simulation has been run and all output artifacts have been committed to the repository.
+The files currently committed to `result/` are listed above. The repository does **not** contain a `results.zip` archive; the Python script creates that archive when it is run.
 
-## How to run
+### Result files
 
-### Option 1: Google Colab
+| File | Contents |
+|---|---|
+| `result/results_summary.csv` | Comparison table for all four replication counts |
+| `result/replication_level_results.csv` | Recorded performance measures for each individual replication |
+| `result/convergence_data.csv` | Cumulative-average values used by the convergence plots |
+| `result/waiting_time_convergence.png` | Cumulative average waiting time |
+| `result/time_in_system_convergence.png` | Cumulative average time in the system |
+| `result/server_utilization_convergence.png` | Cumulative utilization of the three servers |
+| `result/customers_served_by_server.png` | Average customers served by each server |
 
-1. Open [Google Colab](https://colab.research.google.com/).
-2. Upload or open `src/simulation.py` in the notebook environment.
-3. Run the script in a notebook cell. If needed, install the dependencies first:
+### Model documentation
 
-   ```python
-   %pip install pandas matplotlib
-   ```
+The `docs/` directory contains the original editable Visio files:
 
-4. After execution, inspect the comparison table and plots. The script writes output files to `results/` and creates `results.zip` in the current working directory.
+- [`conceptual_model.vsdx`](./docs/conceptual_model.vsdx)
+- [`arrival_event_flowchart.vsdx`](./docs/arrival_event_flowchart.vsdx)
+- [`service_completion_flowchart.vsdx`](./docs/service_completion_flowchart.vsdx)
+- [`simulation_controller.vsdx`](./docs/simulation_controller.vsdx)
 
-### Option 2: Local Python environment
+The Visio files are in Persian. This does not affect the Python simulation or the English README; the additional English flowchart image is intended to make the event logic immediately accessible to a broader audience.
 
-Use Python 3.9 or later with `pandas` and `matplotlib` installed. The script also imports `IPython.display` to display the comparison table; this is available in Jupyter and Colab environments.
+## Run the simulation
 
-From the repository root, run:
+Use Python 3 with the packages imported by the script: `pandas`, `matplotlib`, and `IPython`.
+
+From the project directory (`three-server-queueing-simulation/`), run:
 
 ```bash
 python -m pip install pandas matplotlib ipython
 python src/simulation.py
 ```
 
-If running outside a notebook, the simulation and files can still be generated; the table display may depend on the environment.
+The script writes the CSV files and four PNG charts into a directory named `results/` relative to the current working directory, and creates `results.zip` in the project directory. The committed outputs in this repository are in the separately named `result/` directory; running the script does not automatically replace those committed files.
 
-## Implementation notes
+The script uses `heapq` for event scheduling, `random` for reproducible random sampling, pandas for aggregation and CSV export, and Matplotlib for charts. It also uses `IPython.display` to display the comparison table in notebook environments such as Jupyter or Google Colab.
 
-- A priority queue implemented with Python's `heapq` stores future events.
-- A monotonically increasing sequence number provides deterministic event ordering when event times and priorities match.
-- Each replication uses its own pseudo-random generator, seeded from a master generator initialized with `2026`, making the experiment reproducible.
-- The four reported replication counts are cumulative prefixes of the same 6,000-replication experiment, rather than four unrelated experiments.
-- Service-time ranges and the interarrival-time range are inclusive integer ranges.
+## Scope and limitations
 
-## Limitations
-
-The results depend on the chosen arrival and service-time distributions, the random server-selection rule, the FIFO discipline, and the eight-hour arrival horizon. The model does not represent additional real-world factors such as server breaks, customer abandonment, priorities, or variable staffing. Those features would need to be explicitly added before applying the results to an operational setting.
-
-## Technologies
-
-- Python
-- Discrete-event simulation
-- `heapq` and `random` for event scheduling and random sampling
-- pandas for result aggregation and CSV export
-- Matplotlib for plots
+The estimates depend on the specified arrival and service-time distributions, the shared FIFO queue, random assignment among idle servers, and the eight-hour arrival window. The current model does not include customer abandonment, service priorities, server breaks, or time-varying staffing.
