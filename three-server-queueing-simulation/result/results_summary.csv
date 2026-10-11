@@ -1,0 +1,11 @@
+﻿Performance measure,"N = 1,000","N = 2,000","N = 4,000","N = 6,000"
+Average waiting time (minutes),8.05679164,8.09819886,8.14733242,8.16747542
+Average time in system (minutes),18.54857889,18.58533329,18.6359872,18.65374902
+Average total arrivals,137.642,137.736,137.78325,137.84766667
+Average maximum queue length,6.273,6.291,6.33975,6.34366667
+Average customers served - Server 1,45.802,45.857,45.87575,45.88666667
+Average customers served - Server 2,47.949,48.022,48.01825,48.0695
+Average customers served - Server 3,43.891,43.857,43.88925,43.8915
+Server 1 utilization (%),96.43708333,96.45989583,96.49203125,96.50350694
+Server 2 utilization (%),96.218125,96.236875,96.22369792,96.23628472
+Server 3 utilization (%),96.72395833,96.7484375,96.75463542,96.75409722
