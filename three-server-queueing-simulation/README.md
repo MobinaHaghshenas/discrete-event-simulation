@@ -23,7 +23,7 @@ The simulation advances from one scheduled event to the next using a priority qu
 
 The editable Visio diagrams are included in `docs/` , and they are currently labelled in Persian.
 
-![Three-server queueing simulation event logic](./docs/three_server_queueing_simulation_flowchart.png)
+![Three-server queueing simulation event logic](./docs/Three-Server-Queueing-Simulation-Flowchart.png)
 
 
 
