@@ -21,11 +21,11 @@ The simulation advances from one scheduled event to the next using a priority qu
 
 ## Event logic
 
-The editable Visio diagrams are included in `docs/`. They are currently labelled in Persian, which is fine for the original project documentation. An English flowchart image is intended for the README preview.
+The editable Visio diagrams are included in `docs/` , and they are currently labelled in Persian.
 
-![Three-server queueing simulation event logic](./docs/three_server_queueing_flowchart.png)
+![Three-server queueing simulation event logic](./docs/three_server_queueing_simulation_flowchart.png)
 
-> **Image placement:** add the English flowchart to `docs/` using the exact filename `three_server_queueing_flowchart.png` for the image above to render.
+
 
 ## Results
 
