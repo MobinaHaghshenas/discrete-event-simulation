@@ -77,30 +77,6 @@ The bar chart compares the average number of customers assigned to each server p
 
 ![Average customers served by each server](./result/customers_served_by_server.png)
 
-## Repository contents
-
-```text
-three-server-queueing-simulation/
-├── README.md
-├── src/
-│   └── simulation.py
-├── result/
-│   ├── convergence_data.csv
-│   ├── customers_served_by_server.png
-│   ├── replication_level_results.csv
-│   ├── results_summary.csv
-│   ├── server_utilization_convergence.png
-│   ├── time_in_system_convergence.png
-│   └── waiting_time_convergence.png
-└── docs/
-    ├── arrival_event_flowchart.vsdx
-    ├── conceptual_model.vsdx
-    ├── service_completion_flowchart.vsdx
-    └── simulation_controller.vsdx
-```
-
-The files currently committed to `result/` are listed above. The repository does **not** contain a `results.zip` archive; the Python script creates that archive when it is run.
-
 ### Result files
 
 | File | Contents |
