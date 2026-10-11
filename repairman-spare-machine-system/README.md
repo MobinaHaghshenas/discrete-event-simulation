@@ -40,25 +40,6 @@ The scripts model the system with a **future-event list**. Each event is process
 
 > These are the parameter values encoded in the current scripts. The time ranges are model-time units; the analysis script converts accumulated lost and transition time to hours by dividing by 60.
 
-## Repository Structure
-
-~~~text
-repairman-spare-machine-system/
-├── README.md
-├── src/
-│   ├── repair_system_simulation.py
-│   ├── repair_system_analysis.py
-│   └── repair_system_optimization.py
-└── results/
-    ├── readme.md
-    ├── number-of-failures.png
-    ├── total-lost-time.png
-    ├── repairmen-employment-percentage.png
-    ├── total-transition-time.png
-    ├── maximum-queue-length.png
-    └── total-cost-resource-optimization.png
-~~~
-
 ## Performance Measures
 
 The statistical-analysis script reports:
@@ -153,9 +134,6 @@ This script evaluates repairman/spare-machine combinations in the ranges defined
 - The scripts currently define their main parameters directly in the source code; edit those values to explore other scenarios.
 - Random-number generation and event logic are implemented separately across the scripts. For rigorous comparisons, use independent replications with controlled, documented random seeds and verify that all scenarios use consistent assumptions.
 
-## Scope and Limitations
-
-This is a simulation-based decision-support model, not a guarantee of real-world performance. Results depend on the encoded time distributions, cost assumptions, simulation horizon, and replication count. The current scripts are a useful starting point for studying congestion and resource allocation; further validation of the random-number stream, event handling, and consistency between reported scenarios and script parameters is recommended before using the estimates for operational decisions.
 
 ## Technologies
 
@@ -163,11 +141,3 @@ This is a simulation-based decision-support model, not a guarantee of real-world
 - NumPy
 - SciPy
 - Matplotlib
-
-## Author
-
-**Mobina Haghshenas**
-
----
-
-Part of the [discrete-event-simulation repository](https://github.com/MobinaHaghshenas/discrete-event-simulation).
